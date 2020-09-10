@@ -34,7 +34,7 @@ def handleArgs():
 def printAscciArt():
     os.system('clear')
     print(asciiArt.berzanLogo + termcolor.colored(asciiArt.appTitle, 'green'))
-    time.sleep(0.25)
+    time.sleep(2)
 
 
 def readConfig():
