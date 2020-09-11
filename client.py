@@ -370,7 +370,6 @@ class ClientScope():
                 'session': ''
             }
             publicKey = self._socket.send(publicKeyPayload)
-            print(publicKey)
             key = RSA.importKey(publicKey['response'][0][0].encode())
             cipher = PKCS1_OAEP.new(key)
             ciphertext = cipher.encrypt(message.strip().encode())
