@@ -205,7 +205,6 @@ class ClientScope():
             'session': ''
         }
         response = self._socket.send(p)
-        print(response)
         if response['code'] == '200':
             self._session = response['session']
             self.currentFrame = self.menu
@@ -304,12 +303,8 @@ class ClientScope():
             },
         }
         response = self._socket.send(p)
-        print(response)
         if response['code'] == '200':
             if not len(response['response']) or (len(response['response']) == 1 and response['response'][0][0] == self._username):
-                print(self._username)
-                print(len(response['response']) ==
-                      1 and response['response'][0][0] == self._username)
                 foo = input('\n[ENTER] No Users Found')
                 return
             users = [[]]
