@@ -105,15 +105,6 @@ class ClientSocket():
             import traceback
             traceback.print_exception(*exc_info)
 
-
-def payload(head, body, session):
-    return {
-        'head': head,
-        'body': body,
-        'session': session,
-    }
-
-
 class ClientScope():
     def __init__(self, sock, username, password):
         self.currentFrame = None
