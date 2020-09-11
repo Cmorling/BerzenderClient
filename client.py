@@ -34,7 +34,7 @@ def handleArgs():
 def printAscciArt():
     os.system('clear')
     print(asciiArt.berzanLogo + termcolor.colored(asciiArt.appTitle, 'green'))
-    time.sleep(2)
+    time.sleep(1)
 
 
 def readConfig():
@@ -323,7 +323,6 @@ class ClientScope():
                 users[currentUserPage].append({
                     'username': user[0],
                     'id': user[1],
-                    'publicKey': user[2],
                 })
             chosen = False
             currentUserPage = 0
@@ -333,8 +332,6 @@ class ClientScope():
                 canForward = currentUserPage < len(users) - 1
                 canBackward = currentUserPage > 0
                 self._page('SELECT A USER')
-                print(users[1])
-                print(currentUserPage)
                 for index, user in enumerate(users[currentUserPage]):
                     print('[' + termcolor.colored(index, 'yellow') +
                           '] {}'.format(user['username']))
@@ -364,9 +361,17 @@ class ClientScope():
 
             self._page('CRAFT A MESSAGE')
             message = input(
-                '[' + termcolor.colored('Message to {}'.format(chosen['username']), 'yellow') + ']')
-
-            key = RSA.importKey(chosen['publicKey'].encode())
+                '[' + termcolor.colored('Message to {}'.format(chosen['username']), 'yellow') + '] ')
+            publicKeyPayload = {
+                'head': 'getPublicKey',
+                'body': {
+                    'username': chosen['username'],
+                },
+                'session': ''
+            }
+            publicKey = self._socket.send(publicKeyPayload)
+            print(publicKey)
+            key = RSA.importKey(publicKey['response'][0][0].encode())
             cipher = PKCS1_OAEP.new(key)
             ciphertext = cipher.encrypt(message.strip().encode())
             p = {
