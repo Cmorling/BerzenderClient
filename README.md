@@ -4,7 +4,7 @@
 
 This is a project to complete the programing courses in my high school. This is the client of Berzender.
 
-Welcome to berzender. Here you can create an account and send a message to any user on the network, no friending required. Likewise, you are also exposed on the network and can be sent messages from any user.
+Welcome to berzender. Here you can create an account and send a message to any user on the network, no friending required. Likewise, you are also exposed on the network and can be sent messages from any user. Messages are deleted forever once you have read them.
 Your password is hashed with SHA256 before it's sent to the server to prevent your password from being leaked in a data breach.
 Messages are encrypted with RSA private and public keys, the public keys are stored on the server and are fetched anytime a user wants to send a message to you.
 The private key is stored safely on your local machine.
